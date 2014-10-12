@@ -1,0 +1,37 @@
+{
+    "collection":
+    {
+        "version": "1.0",
+        "href": "http://myurl/api/1.0/layers",
+
+        "items": [
+            {
+                "href": "http://myurl/api/1.0/layers/1",
+                "links": [
+                    {"href": "http://schema.org/Map", "rel": "profile"},
+                    {"href": "http://myurl/api/1.0/layers/1/features/", "rel": "subresource"}
+                ],
+                "data": [
+                    {"name": "title", "value": "Berlin Nightlife"},
+                    {"name": "description", "value": "Nightlife Happenings in Berlin"}
+                ]
+            },
+            {
+                "href": "http://myurl/api/1.0/layers/2",
+                "links": [
+                    {"href": "http://schema.org/Map", "rel": "profile"},
+                    {"href": "http://myurl/api/1.0/layers/2/features/", "rel": "subresource"}
+                ],
+                "data": [
+                    {"name": "title", "value": "Berlin Public Transport"},
+                    {"name": "description", "value": "Stops and Lines of Public Transport in Berlin"}
+                ]
+            }
+        ],
+
+        "links": [{"href": "http://schema.org/Map", "rel": "profile"}],
+
+        "queries": [],
+        "template": [],
+    }
+}

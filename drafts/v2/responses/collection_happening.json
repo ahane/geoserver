@@ -1,0 +1,38 @@
+{
+    "collection":
+    {
+        "version": "1.0",
+        "href": "http://myurl/api/1.0/layers/layer1/happenings?feature=2&after=XXX&before=YYY/",
+
+        "items": [
+            {
+                "href": "http://myurl/api/1.0/layers/layer1/happenings/1",
+                "data": [
+                    {"name": "name", "value": "Party1"},
+                    {"name": "description", "value": "Party2"}
+                    {"name": "startDate", "value": "2014-1-1"}
+                    {"name": "endDate", "value": "2014-1-2"}
+                ],
+
+                "links": [
+                    {
+                        "http://myurl/api/1.0/layers/layer1/happenings/1/performers",
+                        "rel": "http://schema.org/performers",
+                        "name": "performers"
+                    },
+                    {
+                        "http://schema.org/Event",
+                        "rel": "profile",
+                    }
+                ]
+            }
+        ],
+        "links": [
+            {
+                "href": "http://myurl/api/1.0/layers/layer1/features/2",
+                "rel": "http://schema.org/location",
+                "name": "feature"
+            }
+        ]
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "collection":
+        {
+            "version": "1.0",
+            "href": "http://myurl/api/1.0/layers/1/features?joined=happenings&after=XXX&before=YYY",
+
+            "items": [
+                {
+                    "href": "http://myurl/api/1.0/layers/1/features/2?happenings?after=XXX&before=YYY",
+                    "links": [
+                        {
+                            "name": "Happenings matching query",
+                            "rel": "http://schema.org/events",
+                            "prompt": "",
+                            "href": "http://myurl/api/1.0/layers/1/happenings?feature=2&after=XXX&before=YYY/"
+                        },
+                        {
+                            "rel": "icon",
+                            "href": "http://myurl/someimage.jpg",
+                            "render": "image"
+                        },
+                        {
+                            "rel": "profile",
+                            "href": "http://schema.org/Place"
+                        }
+                    ],
+                    "data": [
+                        {
+                            "name": "geojson",
+                            "value": { "type": "Point", "coordinates": [51.1, 13.1] }
+                        },
+                        {
+                            "name": "title", "value": "Location2"
+                        },
+                        {
+                            "name": "adress", "value": "Somestreet 234"
+                        }
+                    ]
+                },
+                {
+                    "href": "http://myurl/api/1.0/layers/1/features/3?happenings?after=XXX&before=YYY",
+                    "links": [
+                        {
+                            "name": "Happenings matching query",
+                            "rel": "http://schema.org/events",
+                            "prompt": "",
+                            "href": "http://myurl/api/1.0/layers/1/happenings?feature=3&after=XXX&before=YYY/"
+                        }
+                        {
+                            "rel": "icon",
+                            "href": "http://myurl/someimage.jpg",
+                            "render": "image"
+                        },
+                        {
+                            "rel": "profile",
+                            "href": "http://schema.org/Place"
+                        }
+                    ],
+                    "data": [
+                        {
+                            "name": "geojson",
+                            "value": { "type": "Point", "coordinates": [51.2, 13.2] }
+                        },
+                        {
+                            "name": "title", "value": "Location2"
+                        },
+                        {
+                            "name": "adress", "value": "Somestreet 345"
+                        }
+                    ]
+                },
+            ],
+
+            "links": [
+                {
+                    "href": "http://myurl/api/1.0/layers/1/features/happenings/", "rel": "collection"
+                },
+                {
+                    "href": "http://myurl/api/1.0/layers/1/features/", "rel": "up"
+                }
+            ],
+
+            "queries": [
+                {
+                    "href": "http://myurl/api/1.0/layers/1/features/happenings",
+                    "rel": "search",
+                    "prompt": "Filter features by wether or not they have happenings in a given timespan."
+                    "data": {
+                        "name": "after", "prompt": "Start datetime", "value": "",
+                        "name": "before", "prompt": "End datetime", "value": ""
+                    }
+                }
+            ]
+        }
+}

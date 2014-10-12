@@ -1,0 +1,32 @@
+{
+    "collection":
+    {
+        "version": "1.0",
+        "href": "http://myurl/api/1.0/layers/layer1/happenings/1/performers/",
+
+        "items": [
+            {
+                "href": "http://myurl/api/1.0/layers/layer1/happenings/1/performers/1",
+                "links": [
+                    {"href": "http://schema.org/Person", "rel": "profile"},
+                    {"href": "http://soundcloud.com/SomeArtistName1", "rel": "http://api.soundcloud.com/users"},
+                    {"href": "http://soundcloud.com/tracks/xyz", "rel": "http://api.soundcloud.com/tracks", "name": "Sample Track"}
+                ]
+                "data": [
+                    {"name": "name", "value": "SomeArtistName"}
+                ]
+            },
+            {
+                "href": "http://myurl/api/1.0/layers/layer1/happenings/1/performers/2",
+                "links": [
+                    {"href": "http://schema.org/Person", "rel": "profile"},
+                    {"href": "http://soundcloud.com/SomeArtistName2", "rel": "http://api.soundcloud.com/users"},
+                    {"href": "http://soundcloud.com/tracks/qwer", "rel": "http://api.soundcloud.com/tracks", "name": "Sample Track"}
+                ]
+                "data": [
+                    {"name": "name", "value": "SomeArtistName2"}
+                ]
+            }
+        ]
+    }
+}
