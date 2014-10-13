@@ -1,6 +1,12 @@
 JOINS = 'http://localhost:6001'
 NAME = 'nightlife'
 
+
+def get_joins():
+    ''' GET join_url
+        return response
+    '''
+
 app.route('/')
 def layer():
     ''' Returns Collection+JSON with a single layer in it.
@@ -19,13 +25,20 @@ def layer():
             queries:
                 templates exposed by join:
                     features/feature_id/RESOURCE?
-                    joines/RESOURCE?
+                    features/q=RESOURCE?
+
+        Pseudocode:
+        -----------
+        GET meta data fields from DB_url
+        GET joins metadata (links, queries) via get_joins()
+        compile into Collection+JSON
     '''
 app.route('/features/')
 def features():
     ''' Returns a Collection+JSON containing all features in this layer.
         A feature is a geographical mark on a map.
         Carries a geojson feature as a data propery.
+        May be combined with a query that referes to a joined subresource
 
         A feature item consists of:
             data:
@@ -46,7 +59,52 @@ def features():
 
         Note: fields with # come from db_resource, $ from join
 
+        Pseudocode:
+        -----------
+        if has query param `join`:
+            return features_joined(query)
+
+        else:
+            GET join metadata (links, queries) via get_join()
+            GET features from DB_url
+            for each feature in features:
+                compile queries/links from join metadata
+                compile into Collection+JSON
+            return CJ
+
+
     '''
+
+def features_joined(query):
+    ''' Returns a Collection+JSON containing feature items.
+        In contrast to features() this function matches and validates a query
+        against the availiable joins and then executes that query.
+        It expects to receive features from the join service wich now carry a
+        link to the query on the joined resource. If the query on the subresource
+        returned no results the feature is filtered.
+
+        Example:
+        query = 'join=events&after=2014-1-1&before=2014-1-2'
+        Feature contains link to/events?after=2014-1-1&before=2014-1-2' if
+        it has events in the stated timeframe.
+
+        Pseudocode:
+        -----------
+        unpack query parametes
+        GET joins metadata (links, queries) via get_join
+        test if `join` parameter matches name of a join
+        test if other parameters match any of the queries on the relevant join
+        if not return error
+        else:
+            request features from join by passing query, url to features
+            and a KEY to use for joining.
+            GET joins_url/join_name/?q=Query&features=features_url&key=Some_field
+            substitute hrefs to claim ownership
+
+    '''
+
+
+
 
 app.route('/features/<feature_id>')
 def feature('/features'):
@@ -55,31 +113,6 @@ def feature('/features'):
         Simply calls features() and filters.
     '''
 
-
-app.route('joins/')
-def request_joins():
-    ''' Returns a Collection+JSON with join items.
-        join items are created in the joins resource.
-
-        The items are expected to carry at least:
-            data:
-                name
-                description
-            links:
-                href self
-                subresource features
-                subresource joined_resource_id
-                profile ext:schema
-
-        queries:
-                exposed by joins service
-
-        Pseudocode:
-        ----------
-        look up join__url in JOIN
-        joins = GET join_url
-        return joins
-    '''
 app.route('/features/<feature_id>/<joined_resource_id>')
 def feature_join():
     ''' Returns Collection+JSON with generic joined resources.
@@ -94,21 +127,3 @@ def feature_join():
         do not substitute href of resources!
         return resource
     '''
-
-@app.route('joins/<joined_resource_id>')
-def join(joined_resource_id):
-    ''' Returns a Collection+JSON of feature items.
-        The feature items where manipulated by the joins service.
-        They now contain a link directly to the resource_url.
-        Should be used with a query.
-        Acts as filter of features based on whether a resource matches a query.
-
-        Pseudocode:
-        -----------
-        call request_joins()
-        compare joined_resource_id with join names
-        if not found return error
-        else
-            features = GET join_url/joined_resource_id/features/query+features_url
-            substiture hrefs to take ownership of features again
-            return features
