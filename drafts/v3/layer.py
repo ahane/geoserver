@@ -78,8 +78,23 @@ def features(layer_name):
 
     return json.jsonify(builder.as_object())
 
-def filter_by_happenings(features_kye, happenings_key, before,
-    
+def filter_by_happenings(features_key, happenings_key, after, before):
+    '''
+    Returns a DataFrame of features which have happenings in a given time frame.
+
+    :param features_key: The name of the features column the happenings table
+    :param happenings_key: The name of the happenings table.
+    :param after:A iso formatted string denoting the start of our time frame
+    :param before: A iso formatted string denoting the end of our time frame.
+    :return: `DataFrame` with features.
+    '''
+    query = {'filters': [
+        {'name': 'start_datetime', 'op': '>=', 'val': after}
+
+    ]}
+
+    events =
+
 
 @app.route('/v1/layers/<layer_name>/features/<feature_id>')
 def feature(layer_name, feature_id):
